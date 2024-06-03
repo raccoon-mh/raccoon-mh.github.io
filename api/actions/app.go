@@ -2,6 +2,7 @@ package actions
 
 import (
 	"api/locales"
+	"os"
 	"sync"
 
 	"github.com/gobuffalo/buffalo"
@@ -46,19 +47,19 @@ func App() *buffalo.App {
 			PreWares: []buffalo.PreWare{
 				cors.Default().Handler,
 			},
-			SessionName: "_api_session",
+			SessionName: os.Getenv("SESSION_NAME"),
 		})
 
-		// Automatically redirect to SSL
-		app.Use(forceSSL())
-
-		// Log request parameters (filters apply).
+		// app.Use(forceSSL())
 		app.Use(paramlogger.ParameterLogger)
-
-		// Set the request content type to JSON
 		app.Use(contenttype.Set("application/json"))
 
-		app.GET("/", HomeHandler)
+		// auth := app.Group("/auth")
+
+		api := app.Group("/api")
+		api.GET("/{targetController}", GetRouteController)
+		api.POST("/{targetController}", PostRouteController)
+
 	})
 
 	return app
