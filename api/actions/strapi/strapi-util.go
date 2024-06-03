@@ -1,6 +1,8 @@
-package actions
+package strapi
 
-import "os"
+import (
+	"github.com/gobuffalo/envy"
+)
 
 type StrapiResponse struct {
 	Data  *Data  `json:"data,omitempty"`
@@ -13,8 +15,8 @@ var (
 )
 
 func init() {
-	STRAPI_URL = os.Getenv("STRAPI_URL")
-	STRAPI_ADMIN_TOKEN = os.Getenv("STRAPI_ADMIN_TOKEN")
+	STRAPI_URL = envy.Get("STRAPI_URL", "http://localhost:1337")
+	STRAPI_ADMIN_TOKEN = envy.Get("STRAPI_ADMIN_TOKEN", "")
 }
 
 type Data struct {

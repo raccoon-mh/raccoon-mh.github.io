@@ -8,10 +8,10 @@ function showSection() {
     }
 }
 
-function hideLoader() {
-    document.getElementById("loader").classList.remove('active')
-}
+// function hideLoader() {
+//     document.getElementById("loader").classList.remove('active')
+// }
 
 window.addEventListener('hashchange', showSection);
 window.addEventListener('load', showSection);
-window.addEventListener('load', hideLoader);
+// window.addEventListener('load', hideLoader);
