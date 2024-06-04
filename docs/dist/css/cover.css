@@ -20,16 +20,17 @@
   z-index: 1;
 }
 
-.cover-container::after {
+.cover-container.after {
   width: 100%;
   height: 100%;
   content: "";
-  /* background-image: url(""); */
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
   opacity: 0.5;
+  background-size: cover;
+  background-position: center;
 }
 
 .b-example-divider {

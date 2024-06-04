@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://* ; connect-src 'self' raccoon-mh.me:3000 data:;">
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/static/logo/apple-touch-icon.png">
@@ -14,6 +14,7 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- title -->
     <title>raccoon-mh Playground</title>
 
     <!-- CSS files -->
@@ -47,7 +48,8 @@
         </div>
         <div class="nav-item dropdown">
           <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+            <!--<span class="avatar avatar-sm" style="background-image: url()"></span>-->
+            <span class="avatar avatar-sm" ></span>
             <div class="d-none d-xl-block ps-2">
               <div>Paweł Kuna</div>
               <div class="mt-1 small text-muted">UI Designer</div>
@@ -90,7 +92,7 @@
     <!-- COVER -->
     <div id="index" class="h-100 section active">
       <div class="d-flex h-100 text-center text-bg-dark">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <div id="cover-container" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
           <header class="mb-auto">
            
           </header>
@@ -150,6 +152,7 @@
     <script src="/dist/js/demo.min.js" defer></script>
     <script src="/dist/js/navigate-pages.js" defer></script>
     <script src="/dist/js/auth.js" defer></script>
+    <script type="module" src="/dist/js/index.js" defer></script>
     
   </body>
 </html>

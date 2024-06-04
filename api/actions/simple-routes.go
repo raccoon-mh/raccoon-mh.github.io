@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"api/actions/giphy"
+	"api/actions/pexels"
 	"api/util"
 
 	"github.com/gobuffalo/buffalo"
@@ -33,8 +34,12 @@ func GetRouteController(c buffalo.Context) error {
 
 	commonResponse := &util.CommonResponse{}
 	switch targetController {
-	case "getrandomraccoon":
-		commonResponse = giphy.RandomRaccon(c)
+	case "giphyrandomraccon":
+		commonResponse = giphy.GiphyRandomRaccon(c)
+	case "giphysearchraccon":
+		commonResponse = giphy.GiphyearchRaccon(c)
+	case "pexelsrandomraccon":
+		commonResponse = pexels.PexelsRandomRaccon(c)
 	default:
 		commonResponse = util.CommonResponseStatusNotFound("NO MATCH targetController")
 		return c.Render(commonResponse.Status.StatusCode, r.JSON(commonResponse))
