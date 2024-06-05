@@ -45,5 +45,7 @@ jobs:
       - name: Deploy to Server
         run: |
           pwd
+          ls
+          ssh-keyscan -H ${{ secrets.DEPLOY_SERVER }} >> ~/.ssh/known_hosts
           scp -r ./api/bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
           ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} 'bash -s' < ${{ secrets.DEPLOY_PATH }}/start.sh
