@@ -33,7 +33,9 @@ jobs:
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Build Buffalo app
-        run: cd api & buffalo build
+        run:
+          cd api
+          buffalo build
 
       - name: Prepare SSH
         uses: webfactory/ssh-agent@v0.5.3
