@@ -33,7 +33,7 @@ jobs:
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Build Buffalo app
-        run:
+        run: |
           cd api
           buffalo build
 
