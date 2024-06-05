@@ -2,6 +2,7 @@ package actions
 
 import (
 	"api/locales"
+	"net/http"
 	"sync"
 
 	"github.com/gobuffalo/buffalo"
@@ -51,6 +52,8 @@ func App() *buffalo.App {
 		app.Use(paramlogger.ParameterLogger)
 		app.Use(contenttype.Set("application/json"))
 
+		app.GET("/alive", alive)
+
 		auth := app.Group("/auth")
 		auth.GET("/{provider}/callback", AuthCallback)
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
@@ -78,4 +81,8 @@ func forceSSL() buffalo.MiddlewareFunc {
 		SSLRedirect:     ENV == "production",
 		SSLProxyHeaders: map[string]string{"X-Forwarded-Proto": "https"},
 	})
+}
+
+func alive(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.JSON(map[string]string{"ststus": "ok"}))
 }
