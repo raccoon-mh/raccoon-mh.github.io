@@ -35,14 +35,14 @@ jobs:
       - name: Build Buffalo app
         run: |
           cd api
-          buffalo build
+          buffalo build -o ./bin/raccoon-mh-playground
 
-      - name: Prepare SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+      # - name: Prepare SSH
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
       - name: Deploy to Server
         run: |
-          scp -r ./api/bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
-          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} 'bash -s' < ${{ secrets.DEPLOY_PATH }}/deploy_script.sh
+          scp -i ${{ secrets.DEPLOY_KEY }} -r ./api/bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
+          ssh -i ${{ secrets.DEPLOY_KEY }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} 'bash -s' < ${{ secrets.DEPLOY_PATH }}/start.sh
