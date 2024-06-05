@@ -44,5 +44,5 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          scp -r ./bin/* your_user@your_server:/path/to/deploy
-          ssh your_user@your_server 'bash -s' < ./deploy_script.sh
+          scp -r ./api/bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} 'bash -s' < ${{ secrets.DEPLOY_PATH }}/deploy_script.sh
