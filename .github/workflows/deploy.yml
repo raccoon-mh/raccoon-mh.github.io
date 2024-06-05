@@ -26,14 +26,14 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-              
+
       - name: Install Buffalo CLI
         run: |
           go install github.com/gobuffalo/cli/cmd/buffalo@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Build Buffalo app
-        run: buffalo build
+        run: pwd & buffalo build
 
       - name: Prepare SSH
         uses: webfactory/ssh-agent@v0.5.3
