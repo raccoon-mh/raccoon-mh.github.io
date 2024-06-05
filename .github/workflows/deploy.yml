@@ -45,5 +45,5 @@ jobs:
       - name: Deploy to Server
         run: |
           pwd
-          scp -i ${{ secrets.DEPLOY_KEY }} -r ./api/bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
+          scp -i ${{ secrets.DEPLOY_KEY }} -r ./bin/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }}:${{ secrets.DEPLOY_PATH }}
           ssh -i ${{ secrets.DEPLOY_KEY }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_SERVER }} 'bash -s' < ${{ secrets.DEPLOY_PATH }}/start.sh
