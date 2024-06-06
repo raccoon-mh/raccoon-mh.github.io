@@ -1,5 +1,7 @@
+const apiHost = "https://raccoon-mh.me:8443"
+
 export async function commonAPIPost(url, data) {
-    const response = await axios.post(url, data)
+    const response = await axios.post(apiHost+url, data)
         .then(function (response) {
             return response
         })
@@ -11,7 +13,7 @@ export async function commonAPIPost(url, data) {
 }
 
 export async function commonAPIGet(url) {
-    const response = await axios.get(url)
+    const response = await axios.get(apiHost+url)
         .then(function (response) {
             return response
         })

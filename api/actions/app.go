@@ -48,10 +48,11 @@ func App() *buffalo.App {
 			SessionName: envy.Get("SESSION_SECRET", "raccoon-mh"),
 		})
 
-		// app.Use(forceSSL())
+		app.Use(forceSSL())
 		app.Use(paramlogger.ParameterLogger)
 		app.Use(contenttype.Set("application/json"))
 
+		app.GET("/", home)
 		app.GET("/alive", alive)
 
 		auth := app.Group("/auth")
@@ -85,4 +86,8 @@ func forceSSL() buffalo.MiddlewareFunc {
 
 func alive(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.JSON(map[string]string{"ststus": "ok"}))
+}
+
+func home(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.JSON("https://raccoon-mh.github.io/"))
 }
