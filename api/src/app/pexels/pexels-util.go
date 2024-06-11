@@ -1,13 +1,14 @@
 package pexels
 
 import (
-	"api/util"
+	"api/src/common"
+	"api/src/models"
 	"math/rand"
 	"net/http"
+	"os"
 	"strconv"
 
-	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/envy"
+	"github.com/labstack/echo/v4"
 )
 
 var (
@@ -16,7 +17,7 @@ var (
 )
 
 func init() {
-	PEXELS_API_TOKEN = envy.Get("PEXELS_API_TOKEN", "")
+	PEXELS_API_TOKEN = os.Getenv("PEXELS_API_TOKEN")
 	PEXELS_HOST = "https://api.pexels.com"
 }
 
@@ -25,28 +26,28 @@ func generateRandomIntInRange(min, max int) int {
 	return min + randomNum
 }
 
-func PexelsRandomRaccon(c buffalo.Context) *util.CommonResponse {
+func PexelsRandomRaccon(c echo.Context) *models.CommonResponse {
 	searchEndPoint := "/v1/search"
-	reqFirst := &util.CommonRequest{
+	reqFirst := &models.CommonRequest{
 		QueryParams: map[string]string{
 			"query":    "raccoon",
 			"page":     "1",
 			"per_page": "1",
 		},
 	}
-	commonResponseFirst, _ := util.CommonCaller(http.MethodGet, PEXELS_HOST, searchEndPoint, reqFirst, PEXELS_API_TOKEN)
+	commonResponseFirst, _ := common.CommonCaller(http.MethodGet, PEXELS_HOST, searchEndPoint, reqFirst, PEXELS_API_TOKEN)
 
 	totalResults := commonResponseFirst.ResponseData.(map[string]interface{})["total_results"].(float64)
 	randomNum := rand.Intn(int(totalResults) + 1)
 
-	reqSecond := &util.CommonRequest{
+	reqSecond := &models.CommonRequest{
 		QueryParams: map[string]string{
 			"query":    "raccoon",
 			"page":     strconv.Itoa(int(randomNum)),
 			"per_page": "1",
 		},
 	}
-	commonResponseSecond, _ := util.CommonCaller(http.MethodGet, PEXELS_HOST, searchEndPoint, reqSecond, PEXELS_API_TOKEN)
+	commonResponseSecond, _ := common.CommonCaller(http.MethodGet, PEXELS_HOST, searchEndPoint, reqSecond, PEXELS_API_TOKEN)
 
 	return commonResponseSecond
 }

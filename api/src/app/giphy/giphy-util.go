@@ -1,11 +1,12 @@
 package giphy
 
 import (
-	"api/util"
+	"api/src/common"
+	"api/src/models"
 	"net/http"
+	"os"
 
-	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/envy"
+	"github.com/labstack/echo/v4"
 )
 
 var (
@@ -14,14 +15,14 @@ var (
 )
 
 func init() {
-	GIPHY_API_TOKEN = envy.Get("GIPHY_API_TOKEN", "")
+	GIPHY_API_TOKEN = os.Getenv("GIPHY_API_TOKEN")
 	GIPHY_HOST = "http://api.giphy.com"
 }
 
-func GiphyRandomRaccon(c buffalo.Context) *util.CommonResponse {
+func GiphyRandomRaccon(c echo.Context) *models.CommonResponse {
 	endPoint := "/v1/gifs/random"
 
-	req := &util.CommonRequest{
+	req := &models.CommonRequest{
 		QueryParams: map[string]string{
 			"api_key":   GIPHY_API_TOKEN,
 			"tag":       "raccoon",
@@ -30,14 +31,14 @@ func GiphyRandomRaccon(c buffalo.Context) *util.CommonResponse {
 		},
 	}
 
-	commonResponse, _ := util.CommonCallerWithoutToken(http.MethodGet, GIPHY_HOST, endPoint, req)
+	commonResponse, _ := common.CommonCallerWithoutToken(http.MethodGet, GIPHY_HOST, endPoint, req)
 	return commonResponse
 }
 
-func GiphyearchRaccon(c buffalo.Context) *util.CommonResponse {
+func GiphsearchRaccon(c echo.Context) *models.CommonResponse {
 	endPoint := "/v1/gifs/random"
 
-	req := &util.CommonRequest{
+	req := &models.CommonRequest{
 		QueryParams: map[string]string{
 			"api_key":   GIPHY_API_TOKEN,
 			"tag":       "raccoon animals cute",
@@ -46,6 +47,6 @@ func GiphyearchRaccon(c buffalo.Context) *util.CommonResponse {
 		},
 	}
 
-	commonResponse, _ := util.CommonCallerWithoutToken(http.MethodGet, GIPHY_HOST, endPoint, req)
+	commonResponse, _ := common.CommonCallerWithoutToken(http.MethodGet, GIPHY_HOST, endPoint, req)
 	return commonResponse
 }
