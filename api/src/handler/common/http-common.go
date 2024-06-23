@@ -1,7 +1,7 @@
 package common
 
 import (
-	"api/src/models"
+	"api/src/handler/models"
 	"bytes"
 	"encoding/json"
 	"io"

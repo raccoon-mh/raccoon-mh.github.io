@@ -1,8 +1,8 @@
 package giphy
 
 import (
-	"api/src/common"
-	"api/src/models"
+	"api/src/handler/common"
+	"api/src/handler/models"
 	"net/http"
 	"os"
 

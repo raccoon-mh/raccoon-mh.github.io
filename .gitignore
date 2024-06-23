@@ -30,3 +30,6 @@ api/!.yarn/plugins
 api/!.yarn/releases
 api/!.yarn/sdks
 api/!.yarn/versions
+
+
+web/node_modules
