@@ -33,3 +33,4 @@ api/!.yarn/versions
 
 
 web/node_modules
+web/dist
