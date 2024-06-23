@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main  # main 브랜치에 push될 때마다 실행
   pull_request:
     branches:
       - main
@@ -19,19 +19,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '22' # 원하는 Node.js 버전 설정
+
+      - name: Change directory to /web
+        run: cd web
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./web
 
       - name: Build project
         run: npm run build
-        env:
-          working-directory: ./web
+        working-directory: ./web
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ../docs  # 빌드된 파일이 있는 디렉토리 설정
+          publish_dir: ./web/docs  # 빌드된 파일이 있는 디렉토리 설정
 
