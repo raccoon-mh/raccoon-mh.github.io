@@ -1,12 +1,34 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const glob = require('glob');
+
+const htmlFiles = glob.sync('./src/**/*.html'); // src 폴더 내 모든 HTML 파일을 매칭
+const entryFiles = glob.sync('./src/**/*.js'); // src 폴더 내 모든 JS 파일을 매칭
+
+const entry = {};
+entryFiles.forEach(file => {
+    const name = path.relative('./src', file).replace(/\.js$/, '');
+    entry[name] = path.resolve(__dirname, file);
+});
+
+const htmlPlugins = htmlFiles.map(file => {
+    const filePath = path.relative('./src', file);
+    const chunkName = filePath.replace(/\.html$/, '');
+    return new HtmlWebpackPlugin({
+        filename: filePath, // HTML 파일의 경로 유지
+        template: file, // 각 HTML 파일 경로
+        chunks: [chunkName], // 해당 HTML 파일에 포함될 JS 청크
+        inject: true, // 스크립트를 body 끝에 삽입
+    });
+});
 
 module.exports = {
-    entry: './src/index.js',
+    entry: entry, // 동적으로 생성된 엔트리 포인트
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, '../docs')
+        filename: '[name].bundle.js', // 엔트리 포인트에 따라 번들 파일 이름 지정
+        path: path.resolve(__dirname, '../docs'),
+        clean: true, // 이전 빌드 파일 삭제
     },
     module: {
         rules: [
@@ -16,44 +38,28 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
+                        presets: ['@babel/preset-env'],
+                    },
+                },
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader'
-                ]
+                    'sass-loader',
+                ],
             },
             {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                        options: { minimize: true }
-                    }
-                ]
-            }
-        ]
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+        ],
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: './index.html'
-        }),
         new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
-        })
+            filename: 'styles.css',
+        }),
+        ...htmlPlugins, // 모든 HTML 파일을 처리
     ],
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist'),
-        },
-        compress: true,
-        port: 9000,
-    }
 };

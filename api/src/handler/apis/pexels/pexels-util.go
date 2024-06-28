@@ -1,8 +1,8 @@
 package pexels
 
 import (
-	"api/src/common"
-	"api/src/models"
+	"api/src/handler/common"
+	"api/src/handler/models"
 	"math/rand"
 	"net/http"
 	"os"
