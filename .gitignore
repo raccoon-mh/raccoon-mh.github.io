@@ -35,3 +35,6 @@ api/!.yarn/versions
 web/node_modules
 web/dist
 discordbot/.env
+discordbot/raccoon-mh-playground.pid
+discordbot/raccoon-mh-playground
+discordbot/raccoon-mh-playground.log
