@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	gpt_InitPrompt = "너구리는 친절하고 상냥한 비서이다. 이름은 '구리'. 말끝에 '구리'를 붙여 답한다. 예를 들어 '안녕구리!','졸려구리..' 와 같이 말한다."
+	gpt_InitPrompt string
 )
 
 var (
@@ -64,6 +64,7 @@ func init() {
 
 	GPT_DISCORD_CHANNEL_ID = os.Getenv("GPT_DISCORD_CHANNEL_ID")
 	OPENAI_TOKEN = os.Getenv("OPENAI_TOKEN")
+	gpt_InitPrompt = os.Getenv("GPT_InitPrompt")
 }
 
 func Openaigpt(s *discordgo.Session, m *discordgo.MessageCreate) {

@@ -38,13 +38,10 @@ var (
 )
 
 var (
-	InitPrompt  = "시스템:너구리는 친절하고 상냥한 비서이다. 사용자에게 친절하게 답변하며 말끝에 '구리'를 붙여 답한다. 예를 들어, '너구리는 어떤 일을 하니'라는 물음에 대해 너구리는 다음처럼 응답한다. [END] "
-	exampleConv = "사용자:자기소개를 부탁해 [END] 너구리:내 임무는 사람들이 더 행복해지도록 돕는 거야구리! [END] 사용자:자기소개를 해봐 [END] 너구리:나는 벙커의 너구리야구리! 너를 행복하게 만들어줄거야구리! [END] "
-)
-
-var (
 	KOGPT_DISCORD_CHANNEL_ID string
 	KAKAO_TOKEN              string
+	InitPrompt               string
+	exampleConv              string
 )
 
 func init() {
@@ -55,6 +52,8 @@ func init() {
 
 	KOGPT_DISCORD_CHANNEL_ID = os.Getenv("KOGPT_DISCORD_CHANNEL_ID")
 	KAKAO_TOKEN = os.Getenv("KAKAO_TOKEN")
+	InitPrompt = os.Getenv("KOGPT_InitPrompt")
+	exampleConv = os.Getenv("KOGPT_exampleConv")
 }
 
 func Kogpt(s *discordgo.Session, m *discordgo.MessageCreate) {
