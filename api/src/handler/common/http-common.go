@@ -12,7 +12,6 @@ import (
 	"strings"
 )
 
-// CommonCaller
 func CommonCaller(callMethod string, targetUrl string, endPoint string, commonRequest *models.CommonRequest, auth string) (*models.CommonResponse, error) {
 	pathParamsUrl := mappingUrlPathParams(endPoint, commonRequest)
 	queryParamsUrl := mappingQueryParams(pathParamsUrl, commonRequest)
