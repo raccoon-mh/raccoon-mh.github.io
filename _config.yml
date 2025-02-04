@@ -1,3 +1,0 @@
-# _config.yml
-remote_theme: chrisrhymes/bulma-clean-theme@v1.0.0
-force_theme: light   # 또는 'dark'로 지정해 강제 테마 적용
