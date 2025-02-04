@@ -1,7 +1,3 @@
 .old/
 
-web/_site
-web/.sass-cache
-web/.jekyll-cache
-web/.jekyll-metadata
-web/vendor
+node_modules
