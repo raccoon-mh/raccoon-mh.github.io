@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= htmlWebpackPlugin.options.templateParameters.title %></title>
+  <!-- 부트스트랩 CSS 등 필요한 외부 리소스 로드 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <!-- 공통 헤더 -->
+  <header class="container">
+    <h1><%= htmlWebpackPlugin.options.templateParameters.title %></h1>
+  </header>
+
+  <!-- 본문 내용은 개별 페이지마다 다르게 주입할 수 있도록 설정 -->
+  <main class="container">
+    <!-- 페이지 별 고유 내용이 있다면, 아래와 같이 영역을 지정 후 별도의 템플릿 또는 데이터로 채울 수 있음 -->
+    <p>페이지에 맞는 내용을 여기에 작성하세요.</p>
+  </main>
+
+  <!-- 번들된 스크립트 삽입 -->
+  <script src="main.js"></script>
+</body>
+</html>
