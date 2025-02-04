@@ -40,13 +40,23 @@ module.exports = {
 
   output: {
     filename: '[name].js', // 각 엔트리 이름에 맞춰 JS 파일 생성 (예: about.js)
-    path: path.resolve(__dirname, '../pages') // 빌드 결과물이 저장될 폴더
+    path: path.resolve(__dirname, 'dist') // 빌드 결과물이 저장될 폴더
   },
 
   devServer: {
-    static: path.resolve(__dirname, '../pages'), // 정적 파일 제공 위치
+    static: path.resolve(__dirname, 'dist'), // 정적 파일 제공 위치
     port: 3000,
-    hot: true
+    hot: true,
+    historyApiFallback: {
+      rewrites: templateFiles.map(file => {
+        const name = path.basename(file, '.html');
+        return {
+          // index 페이지의 경우, 루트 URL('/')를 /index.html 로 매핑
+          from: name === 'index' ? /^\/$/ : new RegExp(`^\\/${name}$`),
+          to: `/${name}.html`
+        };
+      })
+    }
   },
 
   plugins: [
