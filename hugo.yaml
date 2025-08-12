@@ -1,0 +1,78 @@
+title: Minhyeok LEE
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+markup:
+  # allow raw html
+  goldmark:
+    renderer:
+      unsafe: true
+  # enable hextra syntax highlight
+  highlight:
+    noClasses: false
+
+menu:
+  main:
+    - name: Documentation
+      pageRef: /docs
+      weight: 1
+    - name: Search
+      weight: 4
+      params:
+        type: search
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/raccoon-mh/raccoon-mh.github.io"
+      params:
+        icon: github
+
+  # sidebar:
+  #   - name: More
+  #     params:
+  #       type: separator
+  #     weight: 1
+  #   - name: "About"
+  #     pageRef: "/about"
+  #     weight: 2
+  #   - name: "Hugo Docs ↗"
+  #     url: "https://gohugo.io/documentation/"
+  #     weight: 3
+  
+params:
+  theme:
+    default: system
+    displayToggle: true
+
+  page:
+    width: wide
+
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      index: content
+
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo.svg
+      dark: images/logo-dark.svg
+      width: 40
+      height: 20
+
+  footer:
+    displayCopyright: false
+    displayPoweredBy: false
+    width: normal
+
+  editURL:
+    enable: true
+    base: "https://github.com/raccoon-mh/raccoon-mh.github.io/edit/main/content"
+  
+
+enableEmoji: true
+enableInlineShortcodes: true
+copyright: "© 2025 raccoon-mh" 
